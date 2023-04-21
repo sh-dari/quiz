@@ -26,43 +26,51 @@
         <li class="main__condition">Для успешного прохождения нужно правильно ответить минимум на 7 вопросов из 10</li>
         <li class="main__condition">На прохождение теста дается 3 попытки</li>
       </ul>
-      <button type="button" value="Начать" class="main__button" disabled>
+      <button type="button" value="Начать" class="main__button">
         Начать
         <div class="main__button-arrow"></div>
       </button>
     </section>
     <div class="content__line"></div>
-    <section class="question">
-      <h2 class="question__header">Вопрос?</h2>
+    <section class="question display-none">
+      <h2 class="question__header"></h2>
       <ul class="question__items">
-        <li class="question__item">Ответ 1</li>
-        <li class="question__item">Ответ 2</li>
-        <li class="question__item">Ответ 3</li>
-        <li class="question__item">Ответ 4</li>
       </ul>
-      <button type="button" value="Начать" class="question__button" disabled>Принять</button>
+      <button type="button" value="Начать" class="question__button">Принять</button>
     </section>
-    <section class="result">
+    <section class="result display-none">
       <h2 class="result__header">Результаты тестирования</h2>
       <ul class="result__user-info">
         <li class="result__user-name">Константин Константинопольский</li>
         <li class="result__user-date">20.01.2020</li>
       </ul>
-      <div class="result__info result__info_first result__info_bad">
-        <p class="result__text">Результаты 1-й  попытки</p>
-        <div class="result__numbers">
-          <p class="result_point">6/10</p>
-          <p class="result_persent">60 &#37;</p>
+      <div class="result__wrapper">
+        <div class="result__info result__info_first result__info_bad">
+          <p class="result__text result__text_curent"></p>
+          <div class="result__numbers result__numbers_current">
+            <p class="result__point"></p>
+            <p class="result__persent"></p>
+          </div>
+        </div>
+        <div class="result__info result__info_best">
+          <p class="result__text">Лучший результат</p>
+          <div class="result__numbers result__numbers_best">
+            <p class="result__persent result__persent_best">60 &#37;</p>
+          </div>
         </div>
       </div>
-      <p class="result__resume">Не очень хороший результат, рекомендуем изучить курс еще раз.</p>
-      <button type="button" value="Начать" class="result__button" disabled>
+      <p class="result__resume result__resume_bad">Не очень хороший результат, рекомендуем изучить курс еще раз.</p>
+      <p class="result__resume result__resume_good">Текст-комментарий для положительного результата</p>
+      <button type="button" value="Начать" class="result__button">
         Повторить тест
         <div class="result__button-refresh"></div>
       </button>
     </section>
   </main>
   <div class="body__line"></div>
+  <template id="answer-template">
+    <li class="question__item"></li>
+  </template>
   <script src="./index.js"></script>
 </body>
 </html>
