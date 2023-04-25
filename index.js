@@ -1,28 +1,104 @@
 const questions = [
     {
         question: "Вопрос 1",
-        answers: ["Ответ 1", "Ответ 2", "Ответ 3", "Ответ 4"],
-        correct: ['1']
+        answers: [
+            {
+                text: "Ответ 1",
+                correct: true
+            },
+            {
+                text: "Ответ 2",
+                correct: false
+            },
+            {
+                text: "Ответ 3",
+                correct: false
+            },
+            {
+                text: "Ответ 4",
+                correct: false
+            }
+        ]
     },
     {
         question: "Вопрос 2",
-        answers: ["Ответ 1", "Ответ 2", "Ответ 3"],
-        correct: ['2', '3']
+        answers: [
+            {
+                text: "Ответ 1",
+                correct: false
+            },
+            {
+                text: "Ответ 2",
+                correct: true
+            },
+            {
+                text: "Ответ 3",
+                correct: true
+            },
+            {
+                text: "Ответ 4",
+                correct: false
+            }
+        ]
     },
     {
         question: "Вопрос 3",
-        answers: ["Ответ 1", "Ответ 2", "Ответ 3"],
-        correct: ['1']
+        answers: [
+            {
+                text: "Ответ 1",
+                correct: true
+            },
+            {
+                text: "Ответ 2",
+                correct: false
+            },
+            {
+                text: "Ответ 3",
+                correct: false
+            }
+        ]
     },
     {
         question: "Вопрос 4",
-        answers: ["Ответ 1", "Ответ 2", "Ответ 3", "Ответ 4"],
-        correct: ['2']
+        answers: [
+            {
+                text: "Ответ 1",
+                correct: false
+            },
+            {
+                text: "Ответ 2",
+                correct: true
+            },
+            {
+                text: "Ответ 3",
+                correct: false
+            },
+            {
+                text: "Ответ 4",
+                correct: false
+            }
+        ]
     },
     {
         question: "Вопрос 5",
-        answers: ["Ответ 1", "Ответ 2", "Ответ 3", "Ответ 4"],
-        correct: ['4']
+        answers: [
+            {
+                text: "Ответ 1",
+                correct: false
+            },
+            {
+                text: "Ответ 2",
+                correct: false
+            },
+            {
+                text: "Ответ 3",
+                correct: false
+            },
+            {
+                text: "Ответ 4",
+                correct: true
+            }
+        ]
     }
 ]
 
@@ -124,12 +200,18 @@ const nextQuestion = () => {
 
 //Проверка верен ли ответ
 const checkAnswer = () => {
+    let allRight = true;
     const answers = document.querySelectorAll('.question__item_active');
+    const allAnswers = questions[currentQuestionIndex].answers;
     if (answers.length == 0) {
         return
     }
-    const userAnswersId = Array.from(answers).map(item => item.id);
-    if (userAnswersId.toString() === questions[currentQuestionIndex].correct.toString()) {
+    answers.forEach(item => {
+        if (!allAnswers[item.id - 1].correct) {
+            allRight = false;
+        }
+    });
+    if (allRight) {
         score++;
     }
     cleanContainer();
@@ -145,7 +227,7 @@ const showQuestion = () => {
     question.textContent = questions[currentQuestionIndex].question;
     questions[currentQuestionIndex].answers.forEach((item, id) => {
         const answerElement = getTemplate();
-        answerElement.textContent = item;
+        answerElement.textContent = item.text;
         answerElement.id = id + 1;
         answerContainer.append(answerElement);
         answerElement.addEventListener('click', chooseAnswer);
